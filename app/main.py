@@ -16,6 +16,7 @@ def find_index_post(id):
     for i, p in enumerate(my_posts): #iterates and grabs
         if p['id'] == id:
             return i
+        
 #* Standard conventions
     # http://127.0.0.1:8000/...
     # create    post        request with a /posts
@@ -119,3 +120,16 @@ def update_post(id: int, post: Post):
     my_posts[index] = updated_post
     return {"data": updated_post}
 
+#* DBMS (database management system): 
+    # NoSQL database: MongoDB, DynamoDB, ORACLE, SQL Server
+    # Relational database: MYSQL, POSTGRESQL, ORACLE, SQL Server
+        # SQL: Structured Query Language, used to communicate with DBMS
+        # Table represents a subject or event
+            # Related to one another
+            # Has a unique primary key for each entry (row), NOT always the id. Anything unique (email, SSN)
+                # Optional: add a UNIQUE, NOT NULL constraint for columns
+        # POSTGRES: also has datatypes (varchar is basically a string)
+            # Use pgAdmin, make [postgres] server with localhost admin
+            # Make [fastapi] database, then mkae tables under schemas > public 
+            #!break at 2:52
+    
