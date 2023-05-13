@@ -28,9 +28,9 @@ def find_index_post(id):
     # make a Python package (folder) called app for all code and the empty__init__py file
     # make venv with $ py -3 -m venv [venv name] and change interpreter to this path
     # enable venv with [venv name]\Scripts\activate.bat
-    # pip install "fastapi[all]"
+    # do once: pip install "fastapi[all]"
     # uvicorn app.main:app --reload to start server [and check reloads each time]
-    # Use Postman for requests
+    # Use <Postman> for requests
 
 #* Path operations
     # decorator @app.get("/") defines path operation so it is an API, get is the HTTP request method, and / is the root path (e.g. goes to example.com/[...])
@@ -46,7 +46,7 @@ class Post(BaseModel):
     content: str
     isPublished: bool = True
     # typing library
-    rating: Optional[int] = None
+    # rating: Optional[int] = None
 
 #* Database: an array of dictionaries (posts). Need an uniqID. Stored in mem, will be cleared each reload
 my_posts = [{"title": "eg title", "content": "content eg", "id": 1}, {"title": "fav foods", "content": "I love pizza", "id": 2}]
@@ -129,7 +129,25 @@ def update_post(id: int, post: Post):
             # Has a unique primary key for each entry (row), NOT always the id. Anything unique (email, SSN)
                 # Optional: add a UNIQUE, NOT NULL constraint for columns
         # POSTGRES: also has datatypes (varchar is basically a string)
-            # Use pgAdmin, make [postgres] server with localhost admin
-            # Make [fastapi] database, then mkae tables under schemas > public 
-            #!break at 2:52
-    
+            # <pgAdmin>: make [postgres] server with localhost admin
+            # Make [fastapi] database, then make tables under schemas > public 
+            # Datatypes: mkes incrementing integer ID through serial datatype (1, 2, ...), timestamp w/time zone with NOW() defaulted, char varying for text
+            # Save data changes to push into database
+            # [fastapi] database > query tool
+                # ; at end of cmds, capitals ignored so use '' if camelCase, but conventionally capitalize SQL specific keywords
+                #* Making queries
+                    # SELECT [column name; all with *; or an ordered list col1, col2, col3] FROM [table name]
+                        # renaming:     [column name] AS [new col name]
+                        # filter rows:  WHERE [conditional col ...]
+                        #   conditions: AND, OR, IN {set of num}: = num1 OR = num2 ...
+                        #               string = 'str', string LIKE '%TV%' where % is any string
+                        # sort:         ORDER BY [col name] [ACSdefault/DESC], [tiebreaker col] [DESC]         
+                        # head:         LIMIT [n] [OFFSET n]
+                #* Making entries
+                    # INSERT INTO [table name] (col1, col2, opt col3, ...) VALUES ('val1', val2, opt val3), (...), ...  [RETURNING] [* or select cols];
+                #* Deleting entries
+                    # DELETE FROM [table name] WHERE [condition] [RETURNING]
+                #* Updating entries
+                    # UPDATE [table name] SET [col1 = val1 to update], [col2 = val2] WHERE [condition]                  [RETURNING] [* or select cols]
+            # Psycopg 3:57
+                    
